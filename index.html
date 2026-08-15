@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Knowledge Circle — GEI Discovery Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">GEI • DISCOVERY PROTOTYPE</p>
+      <h1>The Knowledge Circle</h1>
+      <p class="lede">Every person, idea, book and experiment is a node. Every unexplored edge is a hypothesis.</p>
+    </header>
+    <section class="toolbar">
+      <label>Search <input id="search" placeholder="Newton, gravity, optics…" /></label>
+      <button id="reset">Reset graph</button>
+      <button id="discover">Find unexplored edges</button>
+    </section>
+    <section class="grid">
+      <div class="panel graph-panel"><svg id="graph" viewBox="0 0 900 650" role="img" aria-label="Interactive knowledge graph"></svg></div>
+      <aside class="panel">
+        <h2>Discovery loop</h2>
+        <ol><li>Map entities</li><li>Connect relationships</li><li>Find contradictions</li><li>Explore missing edges</li><li>Generate testable hypotheses</li></ol>
+        <div id="result" class="result">Select a node or run discovery.</div>
+      </aside>
+    </section>
+    <footer><span id="stats"></span><span>Prototype: deterministic graph + unexplored-edge scoring</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
