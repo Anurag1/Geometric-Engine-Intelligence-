@@ -1,0 +1,44 @@
+[
+  {
+    "id": "newton-01",
+    "question": "How could connecting Kepler's planetary laws, Galileo's terrestrial motion, and Euclidean geometry generate a testable research question?",
+    "nodes": ["Kepler", "Galileo", "Euclid", "Newton"],
+    "known_edges": ["Kepler-Galileo", "Newton-Kepler", "Newton-Galileo", "Euclid-Archimedes"],
+    "task": "Propose one falsifiable hypothesis, identify an assumption, and give a discriminating test."
+  },
+  {
+    "id": "optics-01",
+    "question": "What unexplored connection could be investigated between optics, mechanics, and the experimental tradition of Boyle and Hooke?",
+    "nodes": ["Newton", "Hooke", "Boyle"],
+    "known_edges": ["Newton-Hooke", "Newton-Boyle", "Bacon-Boyle"],
+    "task": "Separate a plausible research connection from a merely verbal analogy."
+  },
+  {
+    "id": "method-01",
+    "question": "What changes when Bacon's question-driven experimental method is combined with a complete graph of scientific claims?",
+    "nodes": ["Bacon", "Newton", "Boyle"],
+    "known_edges": ["Bacon-Boyle", "Newton-Bacon"],
+    "task": "Design a computational discovery loop and specify how it could fail."
+  },
+  {
+    "id": "missing-edge-01",
+    "question": "Choose a potentially useful missing edge among Euclid, Archimedes, Pappus, Galileo, Kepler, and Newton. Explain why the edge deserves investigation without claiming that it is historically unknown.",
+    "nodes": ["Euclid", "Archimedes", "Pappus", "Galileo", "Kepler", "Newton"],
+    "known_edges": ["Euclid-Archimedes", "Archimedes-Pappus", "Newton-Kepler", "Newton-Galileo", "Kepler-Galileo"],
+    "task": "Rank the edge by plausibility and propose a test."
+  },
+  {
+    "id": "ai-architecture-01",
+    "question": "What architectural capability is missing if an AI can answer questions but cannot explicitly represent assumptions, contradictions, provenance, and unexplored relationships?",
+    "nodes": ["knowledge", "claims", "evidence", "contradictions", "hypotheses", "tests"],
+    "known_edges": ["claims-evidence", "claims-contradictions", "hypotheses-tests"],
+    "task": "Give one concrete system design and one benchmark that could falsify its claimed advantage."
+  },
+  {
+    "id": "discovery-01",
+    "question": "If every knowledge node is connected to every other node, what is the computationally useful object: the nodes, the known edges, or the unexplored edges? Explain and propose a scoring function.",
+    "nodes": ["nodes", "edges", "hypotheses", "evidence"],
+    "known_edges": ["nodes-edges", "hypotheses-evidence"],
+    "task": "Define a measurable discovery score rather than relying on intuition."
+  }
+]
