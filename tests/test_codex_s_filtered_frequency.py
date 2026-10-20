@@ -13,13 +13,14 @@ class FilteredFrequencyBaselineTests(unittest.TestCase):
         valid = [("q", "r", "x")]
         test = [("q", "r", "z")]
         result = evaluate(train, valid, test)
-        self.assertEqual(result["entities"], 4)
+        self.assertEqual(result["entities"], 7)
         self.assertEqual(result["train_triples"], 3)
         self.assertEqual(result["valid_triples"], 1)
         self.assertEqual(result["test_triples"], 1)
-        self.assertEqual(result["MRR"], 0.666667)
+        self.assertEqual(result["MRR"], 0.25)
         self.assertEqual(result["Hits@1"], 0.0)
-        self.assertEqual(result["Hits@3"], 1.0)
+        self.assertEqual(result["Hits@3"], 0.0)
+        self.assertEqual(result["Hits@10"], 1.0)
 
     def test_filters_other_known_answers_for_query(self):
         train = [("q", "r", "x"), ("a", "r", "x"), ("b", "r", "y")]
@@ -27,7 +28,7 @@ class FilteredFrequencyBaselineTests(unittest.TestCase):
         test = [("q", "r", "z")]
         result = evaluate(train, valid, test)
         self.assertEqual(result["evaluated_queries"], 1)
-        self.assertEqual(result["entities"], 5)
+        self.assertEqual(result["entities"], 6)
 
     def test_rejects_empty_train_or_test(self):
         with self.assertRaises(ValueError):
