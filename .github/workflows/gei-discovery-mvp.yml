@@ -1,0 +1,23 @@
+name: GEI Discovery MVP
+
+on:
+  push:
+    branches: [main, "feat/reproducible-discovery-mvp"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic unit tests
+        run: python -m unittest discover -s tests -p 'test_gei_discovery_demo.py' -v
+      - name: Run demo smoke test
+        run: python examples/gei_discovery_demo.py --top-k 3 --output /tmp/gei-results.json
+      - name: Validate JSON output
+        run: python -c "import json; d=json.load(open('/tmp/gei-results.json')); assert len(d['candidates']) == 3; print('smoke test passed; candidates:', len(d['candidates']))"
