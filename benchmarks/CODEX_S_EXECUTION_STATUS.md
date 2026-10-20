@@ -26,6 +26,10 @@ The original CoDEx repository reports these CoDEx-S link-prediction metrics for 
 
 Source: https://github.com/tsafavi/codex (CoDEx authors' published repository). These are reported literature results, **not** measurements produced by GEI, and they must not be treated as a direct comparison with the current frequency baseline because the exact evaluation protocol and candidate ranking may differ.
 
+## Latest local validation (2026-10-20)
+
+The four focused fixture tests for the filtered frequency evaluator were executed in an isolated local Python test workspace after correcting the fixture's expected average tie rank. Result: **4 tests passed**. The fixture verifies filtered known answers, average-rank tie handling, input validation, and deterministic output. This is a local unit-test result for the evaluator logic; it is not a run on the official CoDEx-S dataset and does not validate dataset download, full-repository test suite, or GitHub Actions.
+
 ## Current conclusion
 
 - The filtered frequency baseline implementation, fixture tests, and CI workflow are committed.
