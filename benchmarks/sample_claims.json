@@ -1,0 +1,44 @@
+{
+  "claims": [
+    {
+      "id": "c1",
+      "title": "Caffeine can delay sleep onset",
+      "domain": "sleep",
+      "description": "Caffeine timing is associated with sleep latency."
+    },
+    {
+      "id": "c2",
+      "title": "Light exposure influences circadian timing",
+      "domain": "chronobiology",
+      "description": "Evening light can shift the circadian rhythm."
+    },
+    {
+      "id": "c3",
+      "title": "Shift work changes meal timing",
+      "domain": "nutrition",
+      "description": "Work schedules affect when people eat."
+    },
+    {
+      "id": "c4",
+      "title": "Sleep restriction affects attention",
+      "domain": "cognition",
+      "description": "Reduced sleep can impair sustained attention."
+    },
+    {
+      "id": "c5",
+      "title": "Exercise timing relates to sleep quality",
+      "domain": "exercise",
+      "description": "Physical activity timing may correlate with sleep measures."
+    }
+  ],
+  "known_edges": [
+    [
+      "c1",
+      "c4"
+    ],
+    [
+      "c2",
+      "c1"
+    ]
+  ]
+}

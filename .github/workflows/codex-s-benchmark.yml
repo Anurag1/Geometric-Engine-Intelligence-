@@ -1,0 +1,59 @@
+name: CoDEx-S Reproducible Baseline
+
+on:
+  push:
+    branches: [main, "feat/reproducible-discovery-mvp"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  codex-s-frequency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Download official CoDEx-S splits
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/codex-s results
+          base="https://raw.githubusercontent.com/tsafavi/codex/master/data/triples/codex-s"
+          for split in train valid test; do
+            curl --fail --location --retry 3 "$base/$split.txt" --output "/tmp/codex-s/$split.txt"
+            test -s "/tmp/codex-s/$split.txt"
+          done
+          printf 'train rows: '; wc -l < /tmp/codex-s/train.txt
+          printf 'valid rows: '; wc -l < /tmp/codex-s/valid.txt
+          printf 'test rows: '; wc -l < /tmp/codex-s/test.txt
+      - name: Run filtered all-entity tail-frequency baseline
+        run: |
+          python benchmarks/run_codex_s_filtered_frequency.py             --train /tmp/codex-s/train.txt             --valid /tmp/codex-s/valid.txt             --test /tmp/codex-s/test.txt             --output results/codex_s_filtered_frequency.json
+      - name: Validate benchmark result structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("results/codex_s_filtered_frequency.json").read_text())
+          assert result["benchmark"] == "CoDEx-S"
+          assert result["evaluated_queries"] == result["test_triples"] > 0
+          assert 0 <= result["MRR"] <= 1
+          assert all(0 <= result[key] <= 1 for key in ("Hits@1", "Hits@3", "Hits@10"))
+          print(json.dumps(result, indent=2))
+          PY
+      - name: Upload reproducible result artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-s-filtered-frequency-results
+          path: results/codex_s_filtered_frequency.json
+          if-no-files-found: error

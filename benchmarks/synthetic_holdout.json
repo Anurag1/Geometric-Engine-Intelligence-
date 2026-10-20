@@ -1,0 +1,77 @@
+{
+  "description": "Illustrative synthetic graph for testing ranking metrics only; not real-world scientific ground truth.",
+  "claims": [
+    {
+      "id": "c1",
+      "title": "Caffeine timing affects sleep latency",
+      "domain": "sleep",
+      "description": "Caffeine can delay sleep onset."
+    },
+    {
+      "id": "c2",
+      "title": "Caffeine exposure influences sleep onset",
+      "domain": "pharmacology",
+      "description": "Caffeine timing is associated with sleep latency."
+    },
+    {
+      "id": "c3",
+      "title": "Light exposure shifts circadian timing",
+      "domain": "chronobiology",
+      "description": "Evening light can shift circadian rhythm."
+    },
+    {
+      "id": "c4",
+      "title": "Evening light changes sleep timing",
+      "domain": "sleep",
+      "description": "Light exposure influences sleep onset timing."
+    },
+    {
+      "id": "c5",
+      "title": "Soil moisture predicts crop growth",
+      "domain": "agriculture",
+      "description": "Moisture availability affects crop yield."
+    },
+    {
+      "id": "c6",
+      "title": "Rainfall changes soil moisture",
+      "domain": "climate",
+      "description": "Rainfall influences soil water availability."
+    },
+    {
+      "id": "c7",
+      "title": "Exercise timing relates to sleep quality",
+      "domain": "exercise",
+      "description": "Physical activity timing may correlate with sleep measures."
+    },
+    {
+      "id": "c8",
+      "title": "Sleep restriction affects attention",
+      "domain": "cognition",
+      "description": "Reduced sleep can impair sustained attention."
+    }
+  ],
+  "known_edges": [
+    [
+      "c1",
+      "c8"
+    ],
+    [
+      "c3",
+      "c7"
+    ]
+  ],
+  "held_out_positive_edges": [
+    [
+      "c1",
+      "c2"
+    ],
+    [
+      "c3",
+      "c4"
+    ],
+    [
+      "c5",
+      "c6"
+    ]
+  ]
+}
