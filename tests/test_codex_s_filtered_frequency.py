@@ -17,7 +17,9 @@ class FilteredFrequencyBaselineTests(unittest.TestCase):
         self.assertEqual(result["train_triples"], 3)
         self.assertEqual(result["valid_triples"], 1)
         self.assertEqual(result["test_triples"], 1)
-        self.assertEqual(result["MRR"], 0.25)
+        # x is filtered as another known answer; y outranks z, while
+        # a, b, and c tie with z at score zero. Average tie rank is 3.5.
+        self.assertEqual(result["MRR"], round(1 / 3.5, 6))
         self.assertEqual(result["Hits@1"], 0.0)
         self.assertEqual(result["Hits@3"], 0.0)
         self.assertEqual(result["Hits@10"], 1.0)
