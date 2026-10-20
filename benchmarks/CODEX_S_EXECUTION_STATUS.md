@@ -10,7 +10,7 @@ A GitHub Actions workflow was added to:
 3. execute the filtered all-entity relation-tail-frequency baseline;
 4. validate metric ranges and upload the JSON result as an artifact.
 
-The workflow run associated with the current pull-request head completed with failure. GitHub's run metadata returned a completed failed job but no step list, and fetching its job log returned a 404 because no log artifact was available. Therefore, the available evidence does not establish whether the failure was runner provisioning or another pre-step service failure. Crucially, there is no evidence that the dataset download or benchmark code executed.
+The workflow run associated with the current pull-request head completed with failure. GitHub's run metadata returned a completed failed job but no step list, and fetching its job log returned a 404 because no log artifact was available. Two subsequent failed-job retries (CoDEx-S run 39380845367 and GEI MVP run 39380845378) also completed with `steps: null` and no job log URL. Therefore, the available evidence does not establish whether the failure is runner provisioning, repository Actions configuration, or another pre-step service failure. Crucially, there is no evidence that the dataset download or benchmark code executed. An administrator should inspect the repository's Actions settings and GitHub Actions service/runner availability before another benchmark attempt.
 
 ## Published literature reference (not our run)
 
