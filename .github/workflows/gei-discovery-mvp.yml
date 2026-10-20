@@ -15,9 +15,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run deterministic unit tests
-        run: python -m unittest discover -s tests -p 'test_gei_discovery_demo.py' -v
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
       - name: Run demo smoke test
         run: python examples/gei_discovery_demo.py --top-k 3 --output /tmp/gei-results.json
-      - name: Validate JSON output
-        run: python -c "import json; d=json.load(open('/tmp/gei-results.json')); assert len(d['candidates']) == 3; print('smoke test passed; candidates:', len(d['candidates']))"
+      - name: Validate demo JSON output
+        run: python -c "import json; d=json.load(open('/tmp/gei-results.json')); assert len(d['candidates']) == 3; print('demo smoke test passed; candidates:', len(d['candidates']))"
+      - name: Compare heuristic with random baseline on synthetic holdout
+        run: python benchmarks/evaluate_synthetic_baseline.py --k 3 --trials 100 --output /tmp/gei-benchmark.json
+      - name: Validate benchmark JSON output
+        run: python -c "import json; d=json.load(open('/tmp/gei-benchmark.json')); assert d['candidate_count'] == 26; assert d['held_out_positive_count'] == 3; assert len(d['top_k_pairs']) == 3; print('benchmark smoke test passed; heuristic P@3:', d['heuristic_precision_at_k'], 'random mean P@3:', d['random_baseline_mean_precision_at_k'])"
